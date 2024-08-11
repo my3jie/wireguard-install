@@ -147,7 +147,7 @@ function installQuestions() {
 
 	# Generate random number within private ports range
 	if [ -z "$1" ]; then
-		SERVER_PORT=$(shuf -i49152-65535 -n1)
+		SERVER_PORT=$(shuf -i100-900 -n1)
 	else
 		SERVER_PORT="$1"
 	fi
