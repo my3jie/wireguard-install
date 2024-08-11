@@ -146,12 +146,12 @@ function installQuestions() {
 	done
 
 	# Generate random number within private ports range
-	# if [ -z "$1" ]; then
-	# 	SERVER_PORT=$(shuf -i49152-65535 -n1)
-	# else
-	# 	SERVER_PORT="$1"
-	# fi
-    SERVER_PORT=60
+	if [ -z "$1" ]; then
+		SERVER_PORT=$(shuf -i49152-65535 -n1)
+	else
+		SERVER_PORT="$1"
+	fi
+    # SERVER_PORT=60
 	until [[ ${SERVER_PORT} =~ ^[0-9]+$ ]] && [ "${SERVER_PORT}" -ge 1 ] && [ "${SERVER_PORT}" -le 65535 ]; do
 		echo ${SERVER_PORT}
 	# 	# read -rp "Server WireGuard port [1-65535]: " -e -i "${RANDOM_PORT}" SERVER_PORT
