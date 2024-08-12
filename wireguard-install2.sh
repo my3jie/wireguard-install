@@ -8,6 +8,8 @@ ORANGE='\033[0;33m'
 GREEN='\033[0;32m'
 NC='\033[0m'
 
+getPort="$1"
+
 function isRoot() {
 	if [ "${EUID}" -ne 0 ]; then
 		echo "You need to run this script as root"
@@ -145,15 +147,12 @@ function installQuestions() {
 	# 	# read -rp "Server WireGuard IPv6: " -e -i fd42:42:42::1 SERVER_WG_IPV6
 	done
 
-	# Generate random number within private ports range
-	if [ -z "$1" ]; then
-		SERVER_PORT=$(shuf -i100-900 -n1)
-	else
-		SERVER_PORT="$1"
-	fi
+
+    SERVER_PORT=${getPort}
+	echo "/////--------------------------------------------"${SERVER_PORT}
     # SERVER_PORT=60
 	until [[ ${SERVER_PORT} =~ ^[0-9]+$ ]] && [ "${SERVER_PORT}" -ge 1 ] && [ "${SERVER_PORT}" -le 65535 ]; do
-		echo ${SERVER_PORT}
+		echo $1"--------------------------------------------"${SERVER_PORT}
 	# 	# read -rp "Server WireGuard port [1-65535]: " -e -i "${RANDOM_PORT}" SERVER_PORT
 	done
 
